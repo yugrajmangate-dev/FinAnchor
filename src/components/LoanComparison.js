@@ -10,17 +10,31 @@ function LoanComparison() {
     lender: '',
     interest: '',
     emi: '',
-    tenure: '',
-    totalCost: ''
+    tenure: ''
   });
 
   const handleChange = (e) => {
     setNewLoan({ ...newLoan, [e.target.name]: e.target.value });
   };
 
+  const calculateTotalCost = (emi, tenure) => {
+    return parseFloat(emi) * parseFloat(tenure);
+  };
+
   const addLoan = () => {
-    setLoans([...loans, { ...newLoan, totalCost: parseFloat(newLoan.totalCost) }]);
-    setNewLoan({ lender: '', interest: '', emi: '', tenure: '', totalCost: '' });
+    if (newLoan.lender && newLoan.interest && newLoan.emi && newLoan.tenure) {
+      const totalCost = calculateTotalCost(newLoan.emi, newLoan.tenure);
+      setLoans([...loans, { 
+        lender: newLoan.lender, 
+        interest: parseFloat(newLoan.interest),
+        emi: parseFloat(newLoan.emi),
+        tenure: parseFloat(newLoan.tenure),
+        totalCost: totalCost
+      }]);
+      setNewLoan({ lender: '', interest: '', emi: '', tenure: '' });
+    } else {
+      alert('Please fill all fields');
+    }
   };
 
   return (
@@ -52,23 +66,22 @@ function LoanComparison() {
       <form>
         <label>
           Lender:
-          <input type="text" name="lender" value={newLoan.lender} onChange={handleChange} />
+          <input type="text" name="lender" value={newLoan.lender} onChange={handleChange} placeholder="Enter lender name" />
         </label>
         <label>
-          Interest:
-          <input type="number" step="0.1" name="interest" value={newLoan.interest} onChange={handleChange} />
+          Interest Rate (% p.a.):
+          <input type="number" step="0.1" name="interest" value={newLoan.interest} onChange={handleChange} placeholder="e.g., 11.5" />
         </label>
         <label>
-          EMI:
-          <input type="number" name="emi" value={newLoan.emi} onChange={handleChange} />
+          EMI (₹):
+          <input type="number" name="emi" value={newLoan.emi} onChange={handleChange} placeholder="e.g., 16200" />
         </label>
         <label>
-          Tenure:
-          <input type="number" name="tenure" value={newLoan.tenure} onChange={handleChange} />
+          Tenure (months):
+          <input type="number" name="tenure" value={newLoan.tenure} onChange={handleChange} placeholder="e.g., 36" />
         </label>
-        <label>
-          Total Cost:
-          <input type="number" name="totalCost" value={newLoan.totalCost} onChange={handleChange} />
+        <label style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+          <strong>Total Cost (Auto-calculated):</strong> ₹{newLoan.emi && newLoan.tenure ? calculateTotalCost(newLoan.emi, newLoan.tenure).toLocaleString() : '0'}
         </label>
         <button type="button" onClick={addLoan}>Add Loan</button>
       </form>

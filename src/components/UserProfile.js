@@ -6,7 +6,8 @@ function UserProfile() {
     email: '',
     password: '',
     age: '',
-    employmentType: ''
+    employmentType: '',
+    user_id: ''
   });
 
   const [financialProfile, setFinancialProfile] = useState({
@@ -17,6 +18,8 @@ function UserProfile() {
     existingEmi: '',
     monthlyNet: ''
   });
+
+  // const []
 
   const handleUserChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
