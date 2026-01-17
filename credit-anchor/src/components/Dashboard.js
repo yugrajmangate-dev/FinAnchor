@@ -4,7 +4,7 @@ import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement, Filler, BarElement, RadialLinearScale);
 
-// Animated Counter Component
+// v2.0 - Enhanced Dashboard with Mobile Responsive Design
 const AnimatedCounter = ({ target, duration = 2000, suffix = '' }) => {
   const [count, setCount] = useState(0);
 
