@@ -3,7 +3,7 @@
 }
 
 .navbar {
-  background-color: #282c34;
+  background-color: #000000;
   color: white;
   padding: 1rem;
   display: flex;
@@ -34,19 +34,21 @@
 }
 
 .card {
-  border: 1px solid #ddd;
+  border: 1px solid #cccccc;
   padding: 1rem;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .eligibility-card {
-  border: 1px solid #ddd;
+  border: 1px solid #cccccc;
   padding: 1rem;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .progress-bar {
@@ -56,14 +58,14 @@
 .progress {
   width: 100%;
   height: 20px;
-  background-color: #ddd;
+  background-color: #e0e0e0;
   border-radius: 10px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background-color: #4caf50;
+  background-color: #000000;
   transition: width 0.3s;
 }
 
@@ -77,6 +79,9 @@
 
 .emi-results {
   margin-top: 1rem;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .credit-tips ul {
@@ -85,10 +90,11 @@
 }
 
 .credit-tips li {
-  background-color: #e7f3ff;
+  background-color: #f0f0f0;
   margin: 0.5rem 0;
   padding: 0.5rem;
-  border-left: 4px solid #2196f3;
+  border-left: 4px solid #000000;
+  border-radius: 4px;
 }
 
 form {
@@ -101,42 +107,59 @@ form {
 label {
   display: flex;
   flex-direction: column;
+  color: #333;
 }
 
 input, select {
   padding: 0.5rem;
   margin-top: 0.5rem;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: #ffffff;
 }
 
 button {
   padding: 0.5rem 1rem;
-  background-color: #61dafb;
+  background-color: #000000;
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #21b4d6;
+  background-color: #333333;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 th, td {
-  border: 1px solid #ddd;
+  border: 1px solid #cccccc;
   padding: 0.5rem;
   text-align: left;
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #f0f0f0;
+  color: #000000;
+  font-weight: bold;
 }
 
 h3 {
   margin-top: 2rem;
   margin-bottom: 1rem;
+  color: #000000;
+}
+
+h2 {
+  color: #000000;
 }
