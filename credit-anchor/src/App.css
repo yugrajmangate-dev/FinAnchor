@@ -1329,3 +1329,587 @@ tr:last-child td {
     border: 1px solid #ccc;
   }
 }
+
+/* ========== DASHBOARD MOBILE RESPONSIVE ========== */
+
+.dashboard-header {
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.metric-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.metric-card.hovered {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.metric-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.metric-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  margin: 0.5rem 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.metric-label {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.85);
+  margin: 0.25rem 0;
+}
+
+.metric-change {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.8);
+  margin-top: 0.5rem;
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.chart-container {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.chart-title {
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.chart-wrapper {
+  position: relative;
+}
+
+.section-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 2rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.loans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.loan-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.loan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.loan-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.loan-status {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.loan-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.loan-detail {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detail-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.detail-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.upcoming-emi-section {
+  border-radius: 12px;
+  padding: 2rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.upcoming-emi-section h2 {
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.emi-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.emi-item {
+  background: rgba(255,255,255,0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.emi-details h4 {
+  color: white;
+  margin: 0 0 0.3rem 0;
+  font-size: 1rem;
+}
+
+.emi-details p {
+  color: rgba(255,255,255,0.85);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.emi-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.repayment-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.loan-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.loan-table thead {
+  background: var(--bg-secondary);
+}
+
+.loan-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.loan-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.loan-table tbody tr:hover {
+  background: var(--bg-secondary);
+  cursor: pointer;
+}
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.tip-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tip-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary);
+}
+
+.tip-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.tip-card h4 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.tip-card p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ========== TABLET RESPONSIVE (768px - 1024px) ========== */
+@media (max-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .charts-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .loans-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .emi-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .tips-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .metric-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .metric-value {
+    font-size: 1.6rem;
+  }
+
+  .metric-icon {
+    font-size: 2rem;
+  }
+}
+
+/* ========== MOBILE RESPONSIVE (max-width: 768px) ========== */
+@media (max-width: 768px) {
+  .dashboard,
+  .user-profile,
+  .loan-eligibility,
+  .loan-comparison,
+  .credit-score-tracking,
+  .what-if-simulator,
+  .credit-roadmap,
+  .planner-container {
+    padding: 1rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .dashboard-header p {
+    font-size: 1rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .metric-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .metric-icon {
+    font-size: 2rem;
+  }
+
+  .metric-value {
+    font-size: 1.6rem;
+  }
+
+  .metric-card h3 {
+    font-size: 0.95rem;
+  }
+
+  .metric-label,
+  .metric-change {
+    font-size: 0.8rem;
+  }
+
+  .charts-section {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .chart-container {
+    padding: 1rem;
+  }
+
+  .chart-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .chart-wrapper {
+    height: 250px !important;
+  }
+
+  .section-card {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  .loans-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .loan-card {
+    padding: 1rem;
+  }
+
+  .loan-header {
+    margin-bottom: 0.8rem;
+  }
+
+  .loan-header h4 {
+    font-size: 1rem;
+  }
+
+  .loan-detail {
+    padding: 0.4rem 0;
+  }
+
+  .detail-label,
+  .detail-value {
+    font-size: 0.85rem;
+  }
+
+  .upcoming-emi-section {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .upcoming-emi-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .emi-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .emi-item {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .emi-amount {
+    font-size: 1.3rem;
+  }
+
+  .loan-table {
+    font-size: 0.9rem;
+  }
+
+  .loan-table th,
+  .loan-table td {
+    padding: 0.8rem 0.5rem;
+  }
+
+  .tips-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tip-card {
+    padding: 1rem;
+  }
+
+  .tip-icon {
+    font-size: 1.5rem;
+  }
+
+  .tip-card h4 {
+    font-size: 1rem;
+  }
+
+  .tip-card p {
+    font-size: 0.85rem;
+  }
+}
+
+/* ========== SMALL MOBILE (max-width: 480px) ========== */
+@media (max-width: 480px) {
+  .dashboard,
+  .user-profile,
+  .loan-eligibility,
+  .loan-comparison,
+  .credit-score-tracking,
+  .what-if-simulator,
+  .credit-roadmap,
+  .planner-container {
+    padding: 0.75rem;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .dashboard-header p {
+    font-size: 0.9rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .metric-card {
+    padding: 1rem 0.8rem;
+  }
+
+  .metric-icon {
+    font-size: 1.8rem;
+  }
+
+  .metric-value {
+    font-size: 1.4rem;
+  }
+
+  .metric-card h3 {
+    font-size: 0.9rem;
+  }
+
+  .chart-wrapper {
+    height: 200px !important;
+  }
+
+  .section-card {
+    padding: 0.8rem;
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .loan-table {
+    font-size: 0.8rem;
+  }
+
+  .loan-table th,
+  .loan-table td {
+    padding: 0.6rem 0.3rem;
+  }
+
+  .emi-item {
+    padding: 0.8rem;
+  }
+
+  .tip-card {
+    padding: 0.8rem;
+  }
+
+  .tip-icon {
+    font-size: 1.3rem;
+  }
+
+  .tip-card h4 {
+    font-size: 0.9rem;
+  }
+
+  .tip-card p {
+    font-size: 0.8rem;
+  }
+}
