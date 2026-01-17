@@ -1,0 +1,167 @@
+.credit-ready-score {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #1a1a1a;
+  color: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.score-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.score-header h2 {
+  color: #4CAF50;
+  margin-bottom: 10px;
+  font-size: 2.5em;
+}
+
+.score-header p {
+  color: #cccccc;
+  font-size: 1.1em;
+}
+
+.score-display {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.score-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 8px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.score-number {
+  font-size: 3em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.score-label {
+  font-size: 1.2em;
+  opacity: 0.9;
+}
+
+.score-breakdown {
+  width: 400px;
+  height: 300px;
+}
+
+.score-breakdown h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4CAF50;
+}
+
+.input-form {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+}
+
+.input-form h3 {
+  color: #4CAF50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #cccccc;
+}
+
+.form-group input,
+.form-group select {
+  padding: 12px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background: #2a2a2a;
+  color: #ffffff;
+  font-size: 1em;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.recommendations {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 8px;
+}
+
+.recommendations h3 {
+  color: #4CAF50;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.recommendations ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recommendations li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  padding-left: 25px;
+}
+
+.recommendations li:before {
+  content: "✓";
+  color: #4CAF50;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+.recommendations li:last-child {
+  border-bottom: none;
+}
+
+@media (max-width: 768px) {
+  .score-display {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .score-breakdown {
+    width: 100%;
+    height: 250px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
