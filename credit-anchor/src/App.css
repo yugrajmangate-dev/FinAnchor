@@ -21,16 +21,11 @@
 }
 
 .nav-brand {
-  display: none;
+  display: none !important;
 }
 
 .brand-link {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-decoration: none;
-  color: white;
-  transition: var(--transition);
+  display: none !important;
 }
 
 .brand-link:hover {
@@ -38,30 +33,11 @@
 }
 
 .brand-logo {
-  font-size: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
-}
-
-.brand-link:hover .brand-logo {
-  background: rgba(255, 255, 255, 0.25);
-  transform: rotate(-5deg);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: none !important;
 }
 
 .brand-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-  margin-top: -0.2rem;
+  display: none !important;
 }
 
 .brand-name {
