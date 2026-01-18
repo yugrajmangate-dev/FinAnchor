@@ -23,6 +23,10 @@ function App() {
       <div className="App">
         <LanguageSelector />
         <nav className="navbar">
+          <div className="navbar-brand">
+            <span className="navbar-logo">⚓</span>
+            <h1 className="navbar-title">FinAnchor</h1>
+          </div>
           <ul className="nav-menu">
             <li><Link to="/">Dashboard</Link></li>
             <li><Link to="/credit-score">Credit Score</Link></li>

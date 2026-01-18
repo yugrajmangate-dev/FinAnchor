@@ -126,11 +126,6 @@ function LanguageSelector() {
           </select>
         </div>
 
-        <div className="logo-center">
-          <div className="selector-logo">⚓</div>
-          <span className="selector-brand-name">FinAnchor</span>
-        </div>
-
         <div className="audio-toggle">
           <label>
             <input

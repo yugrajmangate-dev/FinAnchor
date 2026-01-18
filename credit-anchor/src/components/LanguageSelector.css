@@ -8,35 +8,10 @@
 
 .language-controls {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-}
-
-.logo-center {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 18px;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  border: 1.5px solid rgba(255, 255, 255, 0.2);
-}
-
-.selector-logo {
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.selector-brand-name {
-  font-weight: 700;
-  font-size: 1.2rem;
-  color: #ffffff;
-  letter-spacing: -0.3px;
-  white-space: nowrap;
 }
 
 .language-dropdown {
