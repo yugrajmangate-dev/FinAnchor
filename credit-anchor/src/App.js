@@ -23,15 +23,6 @@ function App() {
       <div className="App">
         <LanguageSelector />
         <nav className="navbar">
-          <div className="nav-brand">
-            <Link to="/" className="brand-link">
-              <span className="brand-logo">⚓</span>
-              <div className="brand-info">
-                <h1 className="brand-name">FinAnchor</h1>
-                <p className="brand-tagline">Your Financial Compass</p>
-              </div>
-            </Link>
-          </div>
           <ul className="nav-menu">
             <li><Link to="/">Dashboard</Link></li>
             <li><Link to="/credit-score">Credit Score</Link></li>
