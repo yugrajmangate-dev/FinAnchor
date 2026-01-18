@@ -13,10 +13,8 @@ function UserProfile() {
   const [financialProfile, setFinancialProfile] = useState({
     monthlyIncome: '',
     expenses: '',
-    savings: '',
     netSavings: '',
-    existingEmi: '',
-    monthlyNet: ''
+    existingEmi: ''
   });
 
   // const []
@@ -78,20 +76,12 @@ function UserProfile() {
           <input type="number" name="expenses" value={financialProfile.expenses} onChange={handleFinancialChange} />
         </label>
         <label>
-          Savings:
-          <input type="number" name="savings" value={financialProfile.savings} onChange={handleFinancialChange} />
-        </label>
-        <label>
-          Net Savings:
-          <input type="number" name="netSavings" value={financialProfile.netSavings} onChange={handleFinancialChange} />
+          Net Savings (Monthly Income - Monthly Expenses):
+          <input type="number" name="netSavings" value={financialProfile.netSavings} onChange={handleFinancialChange} disabled />
         </label>
         <label>
           Existing EMI:
           <input type="number" name="existingEmi" value={financialProfile.existingEmi} onChange={handleFinancialChange} />
-        </label>
-        <label>
-          Monthly NET:
-          <input type="number" name="monthlyNet" value={financialProfile.monthlyNet} onChange={handleFinancialChange} />
         </label>
 
         <button type="submit">Save Profile</button>
