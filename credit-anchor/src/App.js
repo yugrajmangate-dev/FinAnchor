@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
 
 // Import components
+import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import CreditScoreTracking from './components/CreditScoreTracking';
 import LoanComparison from './components/LoanComparison';
@@ -22,6 +23,7 @@ function App() {
     <Router>
       <div className="App">
         <LanguageSelector />
+        <Header />
         <nav className="navbar">
           <ul className="nav-menu">
             <li><Link to="/">Dashboard</Link></li>
