@@ -133,10 +133,10 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      {/* Welcome Section */}
+      {/* Dashboard Header */}
       <div className="dashboard-header">
-        <h1>Welcome back, User!</h1>
-        <p>Here's your financial overview for this month</p>
+        <h2>Your Financial Dashboard</h2>
+        <p>Monitor your credit score, loans, and financial metrics at a glance</p>
       </div>
 
       {/* Key Metrics Section */}
