@@ -15,7 +15,7 @@ function Header() {
             </svg>
           </div>
           <div className="logo-text">
-            <h1 className="header-title">Financial Dashboard</h1>
+            <h1 className="header-title">Fin Anchor</h1>
             <p className="header-subtitle">Manage Your Finances</p>
           </div>
         </div>
