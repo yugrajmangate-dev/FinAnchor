@@ -1,5 +1,8 @@
 {
   "buildCommand": "cd credit-anchor && npm run build",
   "outputDirectory": "credit-anchor/build",
-  "installCommand": "cd credit-anchor && npm install --legacy-peer-deps"
+  "installCommand": "cd credit-anchor && npm install --legacy-peer-deps",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
