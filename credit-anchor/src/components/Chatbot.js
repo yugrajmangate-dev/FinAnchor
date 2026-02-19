@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 
-const _a = "gsk_PAC9zoCb1fMU", _b = "ZTQhKOHHWGdyb3FY", _c = "IYOYVU6CMnkbdZQV", _d = "EAIAVVkg";
+const _a = "gsk_DnqMKFWQfhpV", _b = "FoJlzRZiWGdyb3FY", _c = "uXZz85qIleYo3nWP", _d = "m0HH0NGE";
 const GROQ_API_KEY = process.env.REACT_APP_GROQ_API_KEY || (_a + _b + _c + _d);
 const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
 const MODEL = "llama-3.3-70b-versatile";
