@@ -2420,6 +2420,8 @@ tr:last-child td {
   box-shadow: none !important;
   min-height: unset;
 }
+/* ============================================================
+   HAMBURGER MENU BUTTON
    ============================================================ */
 .hamburger-btn {
   display: none;
