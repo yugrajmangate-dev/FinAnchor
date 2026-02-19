@@ -87,10 +87,10 @@ function WhatIfSimulator() {
           <div className="arrow">→</div>
           <div className="simulated-score">
             <h4>Simulated Score</h4>
-            <p style={{ color: scoreChange > 0 ? 'green' : scoreChange < 0 ? 'red' : 'black' }}>
+            <p style={{ color: scoreChange > 0 ? '#00d47e' : scoreChange < 0 ? '#f45050' : '#9aa0b4' }}>
               {simulatedScore}
             </p>
-            <p className="change" style={{ color: scoreChange > 0 ? 'green' : scoreChange < 0 ? 'red' : 'black' }}>
+            <p className="change" style={{ color: scoreChange > 0 ? '#00d47e' : scoreChange < 0 ? '#f45050' : '#9aa0b4' }}>
               {scoreChange > 0 ? '+' : ''}{scoreChange} points
             </p>
           </div>

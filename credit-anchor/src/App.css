@@ -484,14 +484,20 @@ label {
 input,
 select,
 textarea {
-  padding: 0.75rem;
+  padding: 0.75rem 1rem;
   margin-top: 0.5rem;
-  border: 1.5px solid var(--border-color);
-  border-radius: 8px;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  border: 1.5px solid rgba(94, 130, 244, 0.25);
+  border-radius: 10px;
+  background-color: #1a1b30;
+  color: #e8eaf6;
   font-size: 1rem;
   transition: var(--transition);
+}
+
+/* Ensure dropdown options are readable on dark bg */
+select option {
+  background-color: #1a1b30;
+  color: #e8eaf6;
 }
 
 input:focus,
@@ -499,11 +505,13 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+  box-shadow: 0 0 0 3px rgba(94, 130, 244, 0.18);
+  background-color: #1e1f38;
 }
 
-input::placeholder {
-  color: var(--text-secondary);
+input::placeholder,
+textarea::placeholder {
+  color: rgba(133, 141, 170, 0.6);
 }
 
 /* ========== BUTTONS ========== */
@@ -1076,17 +1084,23 @@ tr:last-child td {
 .chatbot-input input {
   flex: 1;
   padding: 0.75rem 1rem;
-  border: 1.5px solid var(--border-color);
+  border: 1.5px solid rgba(94,130,244,0.25);
   border-radius: 20px;
   outline: none;
   font-size: 0.95rem;
-  background: var(--bg-secondary);
+  background: #1a1b30;
+  color: #e8eaf6;
   transition: var(--transition);
+}
+
+.chatbot-input input::placeholder {
+  color: rgba(133,141,170,0.55);
 }
 
 .chatbot-input input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+  box-shadow: 0 0 0 3px rgba(94, 130, 244, 0.18);
+  background: #1e1f38;
 }
 
 .chatbot-input input:disabled {
@@ -1311,21 +1325,23 @@ tr:last-child td {
   box-shadow: var(--shadow-lg);
 }
 
+/* Planner text inputs */
 .text-input {
   width: 100%;
-  padding: 0.75rem;
-  border: 1.5px solid var(--border-color);
-  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid rgba(94, 130, 244, 0.25);
+  border-radius: 10px;
   font-size: 1rem;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: #1a1b30;
+  color: #e8eaf6;
   transition: var(--transition);
 }
 
 .text-input:focus {
   outline: none;
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+  box-shadow: 0 0 0 3px rgba(94, 130, 244, 0.18);
+  background-color: #1e1f38;
 }
 
 .calculate-btn {
@@ -1591,12 +1607,15 @@ tr:last-child td {
   margin-bottom: 3rem;
 }
 
+/* Charts area — ensure backgrounds are card-dark not page-black */
 .chart-container {
   background: var(--bg-primary);
   border-radius: 16px;
   padding: 2rem;
   box-shadow: var(--shadow-md);
   border: 1px solid var(--border-color);
+  /* ensure chart canvas is visible */
+  min-height: 360px;
 }
 
 .chart-title {
@@ -1907,16 +1926,21 @@ tr:last-child td {
     padding: 1rem;
   }
 
-  .dashboard-header h1 {
-    font-size: 1.8rem;
+  .dashboard-header {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .dashboard-header h2 {
+    font-size: 1.5rem !important;
   }
 
   .dashboard-header p {
-    font-size: 1rem;
+    font-size: 0.95rem !important;
   }
 
   .metrics-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     margin-bottom: 2rem;
   }
@@ -1949,6 +1973,7 @@ tr:last-child td {
 
   .chart-container {
     padding: 1rem;
+    min-height: 280px;
   }
 
   .chart-title {
@@ -2158,8 +2183,14 @@ tr:last-child td {
   }
 }
 
-/* ============================================================
-   HAMBURGER BUTTON
+/* section-card chart wrapper fix */
+.section-card .chart-container,
+.section-card canvas {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  min-height: unset;
+}
    ============================================================ */
 .hamburger-btn {
   display: none;
