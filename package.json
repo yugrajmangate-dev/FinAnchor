@@ -19,10 +19,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npm start --prefix credit-anchor",
+    "build": "npm run build --prefix credit-anchor",
+    "test": "npm test --prefix credit-anchor",
+    "eject": "npm run eject --prefix credit-anchor"
   },
   "eslintConfig": {
     "extends": [
