@@ -1,18 +1,112 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #e0e0e0;
-}
+:root {
+  /* ── Brand Palette ── */
+  --primary: #5e82f4;
+  --primary-light: #7fa2ff;
+  --primary-dark: #3a5ed6;
+  --accent: #e72a3b;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  /* ── Status ── */
+  --success: #00d47e;
+  --success-light: #4ade80;
+  --warning: #f59e0b;
+  --danger: #f45050;
+  --danger-light: #fca5a5;
+
+  /* ── Dark Surface Scale ── */
+  --gray-50:  #252640;
+  --gray-100: #1e1f38;
+  --gray-200: #252640;
+  --gray-300: #2e3050;
+  --gray-400: #4a4f72;
+  --gray-500: #727b9a;
+  --gray-600: #9aa0b4;
+  --gray-700: #c0c8dc;
+  --gray-800: #dde2f0;
+  --gray-900: #eef0f8;
+
+  /* ── Text ── */
+  --text-primary: #e8eaf6;
+  --text-secondary: #858daa;
+
+  /* ── Backgrounds ── */
+  --bg-primary: #16172b;    /* card surface */
+  --bg-secondary: #0e0e19;  /* page background */
+  --bg-elevated: #1e1f38;   /* raised card */
+
+  /* ── Borders ── */
+  --border-color: #252640;
+
+  /* ── Shadows (heavier on dark bg) ── */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.55);
+  --shadow-lg: 0 10px 32px rgba(0,0,0,0.65);
+  --shadow-xl: 0 20px 48px rgba(0,0,0,0.75);
+
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  /* smooth dark scrollbar */
+  scrollbar-color: #2e3050 #0e0e19;
+  scrollbar-width: thin;
+}
+
+body::-webkit-scrollbar { width: 6px; }
+body::-webkit-scrollbar-track { background: #0e0e19; }
+body::-webkit-scrollbar-thumb { background: #2e3050; border-radius: 3px; }
+
+code {
+  font-family: 'Courier New', monospace;
+  background-color: var(--gray-100);
+  color: var(--primary-light);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+a {
+  color: var(--primary-light);
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
 }

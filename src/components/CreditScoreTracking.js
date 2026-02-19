@@ -24,11 +24,11 @@ function CreditScoreTracking() {
       {
         label: 'Credit Score',
         data: creditScoreHistory,
-        borderColor: '#000000',
-        backgroundColor: 'rgba(0,0,0,0.05)',
-        borderWidth: 2,
-        pointBackgroundColor: '#000000',
-        pointBorderColor: '#ffffff',
+        borderColor: '#5e82f4',
+        backgroundColor: 'rgba(94, 130, 244, 0.15)',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#5e82f4',
+        pointBorderColor: '#0e0e19',
         pointBorderWidth: 2,
         pointRadius: 5,
         pointHoverRadius: 7,
@@ -47,11 +47,8 @@ function CreditScoreTracking() {
         labels: {
           usePointStyle: true,
           padding: 15,
-          font: {
-            size: 12,
-            weight: 'bold',
-          },
-          color: '#000000',
+          font: { size: 12, weight: 'bold' },
+          color: '#9aa0b4',
         },
       },
       title: {
@@ -61,17 +58,18 @@ function CreditScoreTracking() {
           size: 16,
           weight: 'bold',
         },
-        color: '#000000',
+        color: '#e8eaf6',
         padding: 15,
       },
       tooltip: {
-        backgroundColor: '#000000',
-        titleColor: '#ffffff',
-        bodyColor: '#ffffff',
-        borderColor: '#cccccc',
+        backgroundColor: 'rgba(14,14,25,0.92)',
+        titleColor: '#e8eaf6',
+        bodyColor: '#9aa0b4',
+        borderColor: 'rgba(94,130,244,0.3)',
         borderWidth: 1,
-        padding: 10,
+        padding: 12,
         displayColors: false,
+        borderRadius: 10,
       },
     },
     scales: {
@@ -79,26 +77,14 @@ function CreditScoreTracking() {
         beginAtZero: false,
         min: 600,
         max: 800,
-        ticks: {
-          color: '#666666',
-          font: {
-            size: 11,
-          },
-        },
-        grid: {
-          color: 'rgba(0,0,0,0.05)',
-        },
+        ticks: { color: '#727b9a', font: { size: 11 } },
+        grid: { color: 'rgba(255,255,255,0.05)' },
+        border: { color: 'rgba(255,255,255,0.06)' },
       },
       x: {
-        ticks: {
-          color: '#666666',
-          font: {
-            size: 11,
-          },
-        },
-        grid: {
-          color: 'rgba(0,0,0,0.05)',
-        },
+        ticks: { color: '#727b9a', font: { size: 11 } },
+        grid: { color: 'rgba(255,255,255,0.04)' },
+        border: { color: 'rgba(255,255,255,0.06)' },
       },
     },
   };

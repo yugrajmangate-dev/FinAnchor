@@ -199,7 +199,20 @@ function CreditReadyScore() {
               plugins: {
                 legend: {
                   position: 'bottom',
-                  labels: { padding: 20, usePointStyle: true }
+                  labels: {
+                    padding: 20,
+                    usePointStyle: true,
+                    color: '#9aa0b4',
+                    font: { size: 12 },
+                  }
+                },
+                tooltip: {
+                  backgroundColor: 'rgba(14,14,25,0.92)',
+                  titleColor: '#e8eaf6',
+                  bodyColor: '#9aa0b4',
+                  borderColor: 'rgba(94,130,244,0.3)',
+                  borderWidth: 1,
+                  borderRadius: 10,
                 }
               }
             }} />

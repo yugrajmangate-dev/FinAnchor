@@ -2,8 +2,8 @@
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  background: #1a1a1a;
-  color: #ffffff;
+  background: transparent;
+  color: #e8eaf6;
   border-radius: 10px;
   margin-bottom: 20px;
 }
@@ -68,9 +68,10 @@
 }
 
 .input-form {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(94, 130, 244, 0.05);
+  border: 1px solid rgba(94, 130, 244, 0.12);
   padding: 25px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 30px;
 }
 
@@ -99,19 +100,29 @@
 
 .form-group input,
 .form-group select {
-  padding: 12px;
-  border: 1px solid #333;
-  border-radius: 5px;
-  background: #2a2a2a;
-  color: #ffffff;
+  padding: 12px 14px;
+  border: 1.5px solid rgba(94, 130, 244, 0.3);
+  border-radius: 10px;
+  background: #1a1b30;
+  color: #e8eaf6;
   font-size: 1em;
+}
+
+.form-group input::placeholder {
+  color: rgba(133, 141, 170, 0.55);
+}
+
+.form-group select option {
+  background: #1a1b30;
+  color: #e8eaf6;
 }
 
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  border-color: #5e82f4;
+  box-shadow: 0 0 0 3px rgba(94, 130, 244, 0.18);
+  background: #1e1f38;
 }
 
 .recommendations {

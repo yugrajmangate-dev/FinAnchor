@@ -88,50 +88,6 @@ function CreditScoreTracking() {
       },
     },
   };
-          size: 16,
-          weight: 'bold',
-        },
-        color: '#000000',
-        padding: 15,
-      },
-      tooltip: {
-        backgroundColor: '#000000',
-        titleColor: '#ffffff',
-        bodyColor: '#ffffff',
-        borderColor: '#cccccc',
-        borderWidth: 1,
-        padding: 10,
-        displayColors: false,
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: false,
-        min: 600,
-        max: 800,
-        ticks: {
-          color: '#666666',
-          font: {
-            size: 11,
-          },
-        },
-        grid: {
-          color: 'rgba(0,0,0,0.05)',
-        },
-      },
-      x: {
-        ticks: {
-          color: '#666666',
-          font: {
-            size: 11,
-          },
-        },
-        grid: {
-          color: 'rgba(0,0,0,0.05)',
-        },
-      },
-    },
-  };
 
   return (
     <div className="credit-score-tracking">

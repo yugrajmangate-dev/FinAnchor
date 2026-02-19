@@ -80,7 +80,7 @@ function LoanComparison() {
           Tenure (months):
           <input type="number" name="tenure" value={newLoan.tenure} onChange={handleChange} placeholder="e.g., 36" />
         </label>
-        <label style={{ color: '#666', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+        <label style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '0.5rem' }}>
           <strong>Total Cost (Auto-calculated):</strong> ₹{newLoan.emi && newLoan.tenure ? calculateTotalCost(newLoan.emi, newLoan.tenure).toLocaleString() : '0'}
         </label>
         <button type="button" onClick={addLoan}>Add Loan</button>
