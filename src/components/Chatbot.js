@@ -1,317 +1,326 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+﻿import React, { useState, useRef, useEffect, useCallback } from "react";
 
-const knowledgeBase = {
-  dashboard: {
-    keywords: ['dashboard', 'main page', 'overview', 'summary'],
-    responses: [
-      "The Dashboard shows your credit health summary with key metrics like Credit Score, Credit Status, DTI Ratio, and EMI Capacity. It also displays your credit score trend over time and loan eligibility results.",
-      "You can view your EMI calculator, loan comparison table, and credit improvement tips directly from the dashboard."
-    ]
-  },
-  credit_score: {
-    keywords: ['credit score', 'score', 'cibil', 'rating'],
-    responses: [
-      "Your credit score ranges from 300-900. 735+ is considered good, 670-734 is fair, and below 670 needs improvement.",
-      "Factors affecting your score: Payment history (35%), Credit utilization (30%), Length of credit history (15%), New credit (10%), Credit mix (10%).",
-      "To improve: Pay bills on time, reduce credit utilization below 30%, avoid multiple loan inquiries."
-    ]
-  },
-  loan_eligibility: {
-    keywords: ['loan eligibility', 'eligible', 'can i get loan', 'qualification'],
-    responses: [
-      "Loan eligibility depends on your credit score, income, existing EMIs, and debt-to-income ratio.",
-      "For personal loans: Usually need 650+ score, stable income, DTI below 50%.",
-      "Check your eligibility on the Loan Eligibility page for personalized assessment."
-    ]
-  },
-  emi_calculator: {
-    keywords: ['emi', 'calculator', 'monthly payment', 'installment'],
-    responses: [
-      "The EMI calculator helps you estimate monthly loan payments. Input loan amount, tenure, and interest rate to see calculations.",
-      "Formula: EMI = [P x R x (1+R)^N] / [(1+R)^N-1] where P=Principal, R=Monthly rate, N=Number of months.",
-      "Use it to compare different loan options and plan your budget."
-    ]
-  },
-  loan_comparison: {
-    keywords: ['loan comparison', 'compare loans', 'different lenders'],
-    responses: [
-      "The loan comparison table shows different lenders with their interest rates, EMI amounts, tenure options, and total costs.",
-      "Compare based on your needs: lowest EMI, lowest total cost, or best interest rate.",
-      "Remember to consider processing fees, prepayment charges, and other terms."
-    ]
-  },
-  what_if_simulator: {
-    keywords: ['what if', 'simulator', 'simulation', 'predict'],
-    responses: [
-      "The What-If Simulator lets you see how financial decisions affect your credit score before making them.",
-      "Try scenarios like: paying off credit card balance, missing EMI payment, or applying for new loan.",
-      "It's a safe way to understand the impact of different financial choices."
-    ]
-  },
-  credit_roadmap: {
-    keywords: ['roadmap', 'learning', 'gamified', 'tasks', 'education'],
-    responses: [
-      "The Credit-Ready Roadmap is a gamified learning path for first-time borrowers.",
-      "Complete tasks like learning about interest rates and setting savings goals to earn points.",
-      "It turns credit building into an engaging educational journey aligned with SDG 4 and SDG 8."
-    ]
-  },
-  loan_advice: {
-    keywords: ['loan advice', 'should i take', 'borrow money', 'when to borrow'],
-    responses: [
-      "Only borrow when necessary. Consider if you can save or use existing funds first.",
-      "Good reasons: Home purchase, education, emergency medical expenses.",
-      "Avoid borrowing for: Luxury items, vacations, or things that depreciate quickly.",
-      "Always compare interest rates and terms from multiple lenders."
-    ]
-  },
-  debt_management: {
-    keywords: ['debt', 'manage debt', 'too much debt', 'overwhelmed'],
-    responses: [
-      "If you have too much debt: Create a budget, prioritize high-interest debts, consider debt consolidation.",
-      "Keep DTI ratio below 36% for good credit health.",
-      "Seek professional advice if debt payments exceed 40% of income."
-    ]
-  },
-  savings: {
-    keywords: ['save money', 'savings', 'emergency fund', 'invest'],
-    responses: [
-      "Build an emergency fund covering 3-6 months of expenses before taking loans.",
-      "Save 20% of income for long-term goals, invest in low-risk options.",
-      "Use the Credit Roadmap to set up savings goals and track progress."
-    ]
-  }
-};
+const GROQ_API_KEY = process.env.REACT_APP_GROQ_API_KEY;
+const GROQ_API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const MODEL = "llama-3.3-70b-versatile";
+
+const SYSTEM_PROMPT = `You are FinAnchor Advisor, a smart and friendly AI financial assistant built into the FinAnchor app — a credit and loan management platform for Indian users.
+
+Your expertise covers:
+- Credit scores (CIBIL scale 300-900), how to read them, improve them, and what affects them
+- Loan types: home loans, car loans, personal loans, gold loans, education loans
+- EMI calculations, interest rates, loan tenure decisions
+- Debt-to-income (DTI) ratio and financial health
+- Budgeting, savings strategies, emergency funds
+- Credit card management and utilization ratios
+- Financial planning for salaried and self-employed individuals
+- Indian banking and RBI guidelines
+- The FinAnchor app features: Dashboard, Credit Score Tracking, Credit-Ready Score, What-If Simulator, Roadmap, Loan Eligibility, Loan Comparison, Loan True Cost, Credit Health Report, EMI Calculator, User Profile
+
+Guidelines:
+- Be concise, warm, and practical — use bullet points for lists
+- Use the Rupee symbol for monetary examples
+- When users ask about app features, guide them to the relevant page
+- If a user seems stressed about debt, be empathetic and constructive
+- Always end with a follow-up question or actionable tip
+- Never give investment advice for stocks — redirect if asked
+- Keep responses under 200 words unless a detailed explanation is genuinely needed`;
+
+const SUGGESTED_PROMPTS = [
+  { icon: "📊", text: "How can I improve my credit score?" },
+  { icon: "💳", text: "What is a good DTI ratio?" },
+  { icon: "🏠", text: "Home loan eligibility tips" },
+  { icon: "📉", text: "How does missing EMI affect score?" },
+  { icon: "💰", text: "How to reduce my debt faster?" },
+  { icon: "🧮", text: "How is EMI calculated?" },
+];
+
+function TypingIndicator() {
+  return (
+    <div className="message bot">
+      <span className="msg-avatar">🤖</span>
+      <div className="message-content typing-indicator-content">
+        <span className="typing-dot" />
+        <span className="typing-dot" />
+        <span className="typing-dot" />
+      </div>
+    </div>
+  );
+}
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
-      type: 'bot',
-      text: 'Hi! I\'m your FinAnchor Advisor. You can type your questions or use voice commands with the microphone button. I\'ll speak my responses too! What would you like to know?',
-      timestamp: new Date()
-    }
+      role: "assistant",
+      text: "Hi! I am **FinAnchor Advisor** powered by Groq AI.\n\nAsk me anything about credit scores, loans, EMIs, and financial planning — I am here to help!",
+      timestamp: new Date(),
+    },
   ]);
-  const [inputMessage, setInputMessage] = useState('');
+  const [inputMessage, setInputMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
+  const [error, setError] = useState(null);
+
   const messagesEndRef = useRef(null);
+  const inputRef = useRef(null);
   const recognitionRef = useRef(null);
   const synthRef = useRef(null);
 
-  const scrollToBottom = () => {
+  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  }, [messages, isLoading]);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    if (isOpen) setTimeout(() => inputRef.current?.focus(), 150);
+  }, [isOpen]);
 
-  // Initialize speech recognition
   useEffect(() => {
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognitionRef.current = new SpeechRecognition();
+    if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognitionRef.current = new SR();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = false;
-      recognitionRef.current.lang = 'en-US';
-
-      recognitionRef.current.onstart = () => {
-        setIsListening(true);
-      };
-
-      recognitionRef.current.onresult = (event) => {
-        const transcript = event.results[0][0].transcript;
-        handleSendMessage(transcript);
-      };
-
-      recognitionRef.current.onend = () => {
+      recognitionRef.current.lang = "en-IN";
+      recognitionRef.current.onstart = () => setIsListening(true);
+      recognitionRef.current.onresult = (e) => {
+        const t = e.results[0][0].transcript;
+        setInputMessage(t);
         setIsListening(false);
       };
-
-      recognitionRef.current.onerror = (event) => {
-        console.error('Speech recognition error:', event.error);
-        setIsListening(false);
-      };
+      recognitionRef.current.onend = () => setIsListening(false);
+      recognitionRef.current.onerror = () => setIsListening(false);
     }
-
-    // Initialize speech synthesis
-    if ('speechSynthesis' in window) {
-      synthRef.current = window.speechSynthesis;
-    }
-
+    if ("speechSynthesis" in window) synthRef.current = window.speechSynthesis;
     return () => {
-      if (recognitionRef.current) {
-        recognitionRef.current.stop();
-      }
-      if (synthRef.current) {
-        synthRef.current.cancel();
-      }
+      recognitionRef.current?.stop();
+      synthRef.current?.cancel();
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
-  const speakText = (text) => {
-    if (synthRef.current) {
-      // Cancel any ongoing speech
-      synthRef.current.cancel();
+  const speakText = useCallback((text) => {
+    if (!synthRef.current) return;
+    synthRef.current.cancel();
+    const clean = text.replace(/[*_`#>\n]/g, " ").trim();
+    const utt = new SpeechSynthesisUtterance(clean);
+    utt.rate = 0.92;
+    utt.pitch = 1.05;
+    utt.volume = 0.85;
+    utt.onstart = () => setIsSpeaking(true);
+    utt.onend = () => setIsSpeaking(false);
+    utt.onerror = () => setIsSpeaking(false);
+    synthRef.current.speak(utt);
+  }, []);
 
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.9; // Slightly slower for clarity
-      utterance.pitch = 1;
-      utterance.volume = 0.8;
+  const renderText = (text) => {
+    return text.split("\n").map((line, i) => {
+      const parts = line.split(/(\*\*[^*]+\*\*)/g).map((part, j) => {
+        if (part.startsWith("**") && part.endsWith("**")) {
+          return <strong key={j}>{part.slice(2, -2)}</strong>;
+        }
+        return part;
+      });
+      const isBullet = line.trim().startsWith("- ") || line.trim().startsWith("* ");
+      if (isBullet) {
+        const content = line.trim().replace(/^[-*]\s*/, "");
+        return <div key={i} className="chat-bullet">• {content}</div>;
+      }
+      return <div key={i} className={line === "" ? "chat-spacer" : ""}>{parts}</div>;
+    });
+  };
 
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      utterance.onerror = () => setIsSpeaking(false);
+  const callGroqAPI = useCallback(async (userText) => {
+    const history = messages.slice(-12).map((m) => ({
+      role: m.role,
+      content: m.text.replace(/\*\*/g, ""),
+    }));
 
-      synthRef.current.speak(utterance);
+    const response = await fetch(GROQ_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${GROQ_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: [
+          { role: "system", content: SYSTEM_PROMPT },
+          ...history,
+          { role: "user", content: userText },
+        ],
+        temperature: 0.7,
+        max_tokens: 512,
+        top_p: 0.9,
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.json().catch(() => ({}));
+      throw new Error(err?.error?.message || `API error ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data.choices[0]?.message?.content || "I could not generate a response. Please try again.";
+  }, [messages]);
+
+  const handleSendMessage = useCallback(async (text) => {
+    const trimmed = (text !== undefined ? text : inputMessage).trim();
+    if (!trimmed || isLoading) return;
+
+    setInputMessage("");
+    setError(null);
+
+    const userMsg = { role: "user", text: trimmed, timestamp: new Date() };
+    setMessages((prev) => [...prev, userMsg]);
+    setIsLoading(true);
+
+    try {
+      const reply = await callGroqAPI(trimmed);
+      const botMsg = { role: "assistant", text: reply, timestamp: new Date() };
+      setMessages((prev) => [...prev, botMsg]);
+      speakText(reply);
+    } catch (err) {
+      setError("Could not reach AI. Check your connection and try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }, [inputMessage, isLoading, callGroqAPI, speakText]);
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
     }
   };
 
   const startListening = () => {
     if (recognitionRef.current && !isListening) {
-      try {
-        recognitionRef.current.start();
-      } catch (error) {
-        console.error('Error starting speech recognition:', error);
-      }
+      try { recognitionRef.current.start(); } catch (_) {}
     }
   };
 
-  const toggleVoice = () => {
-    if (isSpeaking) {
-      if (synthRef.current) {
-        synthRef.current.cancel();
-        setIsSpeaking(false);
-      }
-    } else {
-      startListening();
-    }
+  const stopSpeech = () => {
+    synthRef.current?.cancel();
+    setIsSpeaking(false);
   };
 
-  const findResponse = useCallback((userMessage) => {
-    const message = userMessage.toLowerCase();
-
-    for (const data of Object.values(knowledgeBase)) {
-      for (const keyword of data.keywords) {
-        if (message.includes(keyword)) {
-          return data.responses[Math.floor(Math.random() * data.responses.length)];
-        }
-      }
-    }
-
-    // Default responses
-    const defaults = [
-      "I'm here to help with credit and loan questions. Try asking about the dashboard, credit scores, or loan advice!",
-      "I can assist with: dashboard features, credit score explanation, loan eligibility, EMI calculations, loan comparison, and general financial advice.",
-      "Feel free to ask about any aspect of your financial dashboard or loan-related questions."
-    ];
-
-    return defaults[Math.floor(Math.random() * defaults.length)];
-  }, []);
-
-  const handleSendMessage = useCallback((messageText) => {
-    if (!messageText || messageText.trim() === '') return;
-
-    const userMessage = {
-      type: 'user',
-      text: messageText,
-      timestamp: new Date()
-    };
-
-    setMessages(prev => [...prev, userMessage]);
-    setInputMessage(''); // Clear input after sending
-
-    // Simulate bot thinking
-    setTimeout(() => {
-      const botResponseText = findResponse(messageText);
-      const botResponse = {
-        type: 'bot',
-        text: botResponseText,
-        timestamp: new Date()
-      };
-      setMessages(prev => [...prev, botResponse]);
-
-      // Speak the response
-      speakText(botResponseText);
-    }, 1000);
-  }, [findResponse]);
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !isListening) {
-      handleSendMessage(inputMessage);
-    }
-  };
-
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
+  const lastAssistantMsg = [...messages].reverse().find((m) => m.role === "assistant");
 
   return (
     <>
-      {/* Chat Button */}
-      <div className="chatbot-button" onClick={toggleChat}>
-        {isOpen ? '✕' : '💬'}
-      </div>
+      <button
+        className={`chatbot-button${isOpen ? " chatbot-button--open" : ""}`}
+        onClick={() => setIsOpen((o) => !o)}
+        aria-label="Toggle FinAnchor AI Chat"
+      >
+        {isOpen ? "✕" : (
+          <span className="chatbot-btn-inner">
+            <span>🤖</span>
+            <span className="chatbot-btn-pulse" />
+          </span>
+        )}
+      </button>
 
-      {/* Chat Window */}
       {isOpen && (
         <div className="chatbot-window">
           <div className="chatbot-header">
-            <h4>FinAnchor Advisor</h4>
-            <span>Type or speak - Your AI Financial Guide</span>
-            {(!recognitionRef.current || !synthRef.current) && (
-              <div className="voice-warning">
-                ⚠️ Voice features not supported in this browser
+            <div className="chatbot-header-info">
+              <span className="chatbot-avatar">🤖</span>
+              <div>
+                <h4>FinAnchor Advisor</h4>
+                <span className="chatbot-status">
+                  <span className="status-dot" />
+                  Groq · Llama 3.3 70B · Always online
+                </span>
               </div>
-            )}
+            </div>
+            <button className="chatbot-close-btn" onClick={() => setIsOpen(false)}>✕</button>
           </div>
 
           <div className="chatbot-messages">
-            {messages.map((message, index) => (
-              <div key={index} className={`message ${message.type}`}>
-                <div className="message-content">
-                  {message.text}
-                  {message.type === 'bot' && isSpeaking && index === messages.length - 1 && (
+            {messages.map((msg, i) => (
+              <div key={i} className={`message ${msg.role === "assistant" ? "bot" : "user"}`}>
+                {msg.role === "assistant" && <span className="msg-avatar">🤖</span>}
+                <div className="message-content">{renderText(msg.text)}</div>
+                <div className="message-time">
+                  {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  {msg.role === "assistant" && isSpeaking && i === messages.length - 1 && (
                     <span className="speaking-indicator"> 🔊</span>
                   )}
                 </div>
-                <div className="message-time">
-                  {message.timestamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
-                </div>
               </div>
             ))}
+
+            {isLoading && <TypingIndicator />}
+
+            {error && (
+              <div className="chat-error">
+                <span>⚠️ {error}</span>
+                <button onClick={() => setError(null)}>✕</button>
+              </div>
+            )}
+
+            {messages.length <= 2 && !isLoading && (
+              <div className="chat-suggestions">
+                <p className="suggestions-label">Quick topics:</p>
+                <div className="suggestions-grid">
+                  {SUGGESTED_PROMPTS.map((p, i) => (
+                    <button
+                      key={i}
+                      className="suggestion-chip"
+                      onClick={() => handleSendMessage(p.text)}
+                    >
+                      {p.icon} {p.text}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div ref={messagesEndRef} />
           </div>
 
           <div className="chatbot-input">
             <input
+              ref={inputRef}
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Type your message or use voice..."
-              disabled={isListening}
+              onKeyDown={handleKeyDown}
+              placeholder={isListening ? "🎤 Listening..." : "Ask me anything about finance..."}
+              disabled={isLoading || isListening}
+              maxLength={500}
             />
             <div className="voice-controls">
-              <button
-                className={`voice-btn mic ${isListening ? 'active' : ''}`}
-                onClick={toggleVoice}
-                title={isListening ? 'Stop listening' : 'Start voice input'}
-                disabled={!recognitionRef.current}
-              >
-                {isListening ? '🎤' : '🎙️'}
-              </button>
-              <button
-                className={`voice-btn speaker ${isSpeaking ? 'active' : ''}`}
-                onClick={() => isSpeaking ? synthRef.current?.cancel() : speakText(messages[messages.length - 1]?.text || '')}
-                title={isSpeaking ? 'Stop speaking' : 'Read last message'}
-                disabled={!synthRef.current}
-              >
-                {isSpeaking ? '🔊' : '🔈'}
-              </button>
+              {recognitionRef.current && (
+                <button
+                  className={`voice-btn mic ${isListening ? "active" : ""}`}
+                  onClick={startListening}
+                  disabled={isLoading || isListening}
+                  title="Voice input"
+                >
+                  {isListening ? "🎤" : "🎙️"}
+                </button>
+              )}
+              {synthRef.current && (
+                <button
+                  className={`voice-btn speaker ${isSpeaking ? "active" : ""}`}
+                  onClick={isSpeaking ? stopSpeech : () => lastAssistantMsg && speakText(lastAssistantMsg.text)}
+                  title={isSpeaking ? "Stop speaking" : "Read last reply"}
+                >
+                  {isSpeaking ? "🔊" : "🔈"}
+                </button>
+              )}
             </div>
-            <button onClick={() => handleSendMessage(inputMessage)} disabled={isListening}>Send</button>
+            <button
+              className="send-btn"
+              onClick={() => handleSendMessage()}
+              disabled={isLoading || !inputMessage.trim()}
+              title="Send"
+            >
+              {isLoading ? <span className="send-spinner" /> : "➤"}
+            </button>
           </div>
         </div>
       )}
