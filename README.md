@@ -21,7 +21,7 @@ A web-based platform that helps users understand and improve their credit health
 
 ## Database Schema
 
-The application uses the following database tables:
+The application uses the following database tables:-
 
 ### User Table
 - User_id (AUTO_INCREMENT PRIMARY KEY)
